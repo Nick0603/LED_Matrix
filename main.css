@@ -1,0 +1,71 @@
+*{
+   font-family: 微軟正黑體;
+  vertical-align: top;
+}
+
+.nav_area{
+  background-color: #00A6DE;
+  width: 100%;
+  position: fixed;
+  top:0px;
+  margin: 0px;
+  height: 60px;
+}
+
+.button{
+  display: inline-block;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: #00A6DE;
+  color: #fff;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+.button_selected{
+  border-bottom: 7px solid #47D1FF;
+}
+
+
+.db5 {
+  font-size: 24px;
+  margin: 0 10px 10px 0;
+  s
+}
+
+.display_code{
+  padding: 0px;
+  margin: 0px;
+}
+
+.box {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background-image:   url(http://webduinoio.github.io/demo/max7219/light.jpg);
+  background-position: 0 0;
+  background-size: auto 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.a {
+  text-align: center;  
+  height: auto;
+  float: left;
+  background-image: none;
+}
+
+.b {
+  width: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+.b:hover {
+  opacity: .7;
+}
+
+.b.click {
+  background-position: -50px 0;
+}

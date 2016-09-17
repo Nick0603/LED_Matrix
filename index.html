@@ -1,0 +1,314 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Webduino Blockly Demo 05</title>
+  <link rel="stylesheet" href="main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://webduino.io/components/webduino-js/dist/webduino-all.min.js"></script>
+  <script src="https://blockly.webduino.io/webduino-blockly.js"></script>
+  <script src="https://blockly.webduino.io/lib/firebase.js"></script>
+  <script src="https://blockly.webduino.io/lib/runtime.min.js"></script>
+</head>
+  
+<body>
+    
+    <div class="outputs">
+      <h2>
+        系統狀況:
+        <span id="ready">無狀態</span>
+      </h2>
+    </div>
+  
+  <div id="ports">
+      
+      DIN: <select id="p_din">
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+      </select>
+    
+      CS: <select id="p_cs" >
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+      </select>
+
+      CLK: <select id="p_clk">
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+      </select>
+  </div>
+    <div class="board">
+      <span>Board：</span><input type="text" id="deviceId" value="" size="5" maxlength="4">
+      <button id="submit">送出</button>
+    </div>
+    <div class="marquee">
+	    <span>跑馬燈：</span><button id="btn-l">往左</button><button id="btn-r">往右</button><button id="btn-stop">停止</button>
+    </div>
+      
+    <div class="div_input">
+      <span>代碼：</span>
+      <input id="code"   value="0000000000000000" size="17" type="text"  maxlength="16">
+      <button id="clear">清空</button>
+    </div>
+      
+    <div class="image_selects">
+      <span>ABC: </span>
+        <select id="en-big" class="changeCode">
+          <option></option>
+          <option value="00fc262226fc0000">A</option>
+          <option value="00fe929292fc0000">B</option>
+          <option value="007cc68282820000">C</option>
+          <option value="00fe8282c67c0000">D</option>
+          <option value="00fe929292920000">E</option>
+          <option value="00fe121212020000">F</option>
+          <option value="00fe829292f20000">G</option>
+          <option value="00fe101010fe0000">H</option>
+          <option value="008282fe82820000">I</option>
+          <option value="00828282fe020000">J</option>
+          <option value="00fe102844820000">K</option>
+          <option value="00fe808080800000">L</option>
+          <option value="00fe02fc02fe0000">M</option>
+          <option value="00fe0c30c0fe0000">N</option>
+          <option value="007cc682c67c0000">O</option>
+          <option value="00fe2222223e0000">P</option>
+          <option value="007cc6a246bc0000">Q</option>
+          <option value="00fe2262e2be0000">R</option>
+          <option value="009e929292f20000">S</option>
+          <option value="000202fe02020000">T</option>
+          <option value="00fe808080fe0000">U</option>
+          <option value="003e60c0603e0000">V</option>
+          <option value="00fe80fe80fe0000">W</option>
+          <option value="00c66c106cc60000">X</option>
+          <option value="000e18f0180e0000">Y</option>
+          <option value="00c2a2928a860000">Z</option>
+        </select>
+
+      <span>abc: </span>
+      <select id="en-small" class="changeCode">
+        <option></option>
+        <option value="00f08888f8800000">a</option>
+        <option value="00fe9090f0000000">b</option>
+        <option value="00f0909090000000">c</option>
+        <option value="0000f09090fe0000">d</option>
+        <option value="00f8a8a8a8b80000">e</option>
+        <option value="000008fe0a000000">f</option>
+        <option value="0000bca4a4fc0000">g</option>
+        <option value="00fe1010f0000000">h</option>
+        <option value="000000f400000000">i</option>
+        <option value="000080f400000000">j</option>
+        <option value="00fe205088000000">k</option>
+        <option value="000000fe00000000">l</option>
+        <option value="00f010f010f00000">m</option>
+        <option value="00f01010f0000000">n</option>
+        <option value="00f09090f0000000">o</option>
+        <option value="00fc24243c000000">p</option>
+        <option value="003c2424fc700000">q</option>
+        <option value="00f0201000000000">r</option>
+        <option value="00b8a8a8e8000000">s</option>
+        <option value="0004fe8400000000">t</option>
+        <option value="00f08080f0000000">u</option>
+        <option value="0070807000000000">v</option>
+        <option value="00f080f080f00000">w</option>
+        <option value="0088502050880000">x</option>
+        <option value="0000b8a0a0f80000">y</option>
+        <option value="00c8a8a898000000">z</option>
+      </select>
+
+      <div id="br"></div>
+      <span>123: </span>
+      <select id="num" class="changeCode">
+        <option></option>
+        <option value="0000fe8282fe0000">0</option>
+        <option value="00000082fe800000">1</option>
+        <option value="0000f292929e0000">2</option>
+        <option value="0000929292fe0000">3</option>
+        <option value="00001e1010fe0000">4</option>
+        <option value="00009e9292f20000">5</option>
+        <option value="0000fe9292f20000">6</option>
+        <option value="0000020202fe0000">7</option>
+        <option value="0000fe9292fe0000">8</option>
+        <option value="00009e9292fe0000">9</option>
+        <option value="82fe8000fe82fe00">10</option>
+        <option value="82fe800082fe8000">11</option>
+        <option value="82fe8000f2929e00">12</option>
+        <option value="82fe80009292fe00">13</option>
+        <option value="82fe80001e10fe00">14</option>
+        <option value="82fe80009e92f200">15</option>
+        <option value="82fe8000fe92f200">16</option>
+        <option value="82fe80000202fe00">17</option>
+        <option value="82fe8000fe92fe00">18</option>
+        <option value="82fe80009e92fe00">19</option>
+        <option value="f2929e00fe82fe00">20</option>
+        <option value="f2929e0082fe8000">21</option>
+        <option value="f2929e00f2929e00">22</option>
+        <option value="f2929e009292fe00">23</option>
+        <option value="f2929e001e10fe00">24</option>
+        <option value="f2929e009e92f200">25</option>
+        <option value="f2929e00fe92f200">26</option>
+        <option value="f2929e000202fe00">27</option>
+        <option value="f2929e00fe92fe00">28</option>
+        <option value="f2929e009e92fe00">29</option>
+        <option value="9292fe00fe82fe00">30</option>
+        <option value="9292fe0082fe8000">31</option>
+        <option value="9292fe00f2929e00">32</option>
+        <option value="9292fe009292fe00">33</option>
+        <option value="9292fe001e10fe00">34</option>
+        <option value="9292fe009e92f200">35</option>
+        <option value="9292fe00fe92f200">36</option>
+        <option value="9292fe000202fe00">37</option>
+        <option value="9292fe00fe92fe00">38</option>
+        <option value="9292fe009e92fe00">39</option>
+        <option value="1e10fe00fe82fe00">40</option>
+        <option value="1e10fe0082fe8000">41</option>
+        <option value="1e10fe00f2929e00">42</option>
+        <option value="1e10fe009292fe00">43</option>
+        <option value="1e10fe001e10fe00">44</option>
+        <option value="1e10fe009e92f200">45</option>
+        <option value="1e10fe00fe92f200">46</option>
+        <option value="1e10fe000202fe00">47</option>
+        <option value="1e10fe00fe92fe00">48</option>
+        <option value="1e10fe009e92fe00">49</option>
+        <option value="9e92f200fe82fe00">50</option>
+        <option value="9e92f20082fe8000">51</option>
+        <option value="9e92f200f2929e00">52</option>
+        <option value="9e92f2009292fe00">53</option>
+        <option value="9e92f2001e10fe00">54</option>
+        <option value="9e92f2009e92f200">55</option>
+        <option value="9e92f200fe92f200">56</option>
+        <option value="9e92f2000202fe00">57</option>
+        <option value="9e92f200fe92fe00">58</option>
+        <option value="9e92f2009e92fe00">59</option>
+        <option value="fe92f200fe82fe00">60</option>
+      </select>
+
+      <span>icon: </span>
+      <select id="face" class="changeCode">
+        <option></option>
+        <option value="1026464040462610">:) 1</option>
+        <option value="ffd3b3bfbfb3d3ff">:) 2</option>
+        <option value="804c2c20202c4c80">:(</option>
+        <option value="316aaaa4a4aa6a31">XD</option>
+        <option value="914a444040444a91">>_<</option>
+            <option value="4525252020252545">=_=</option>
+            <option value="080c0effff0e0c08">↑</option>
+            <option value="103070ffff707010">↓</option>
+            <option value="183c7eff18181818">←</option>
+            <option value="18181818ff7e3c18">→</option>
+            <option value="0c1e3e7c3e1e0c00">♥</option>
+            <option value="0c12224422120c00">♡</option>
+            <option value="3c4281818181423c">○</option>
+            <option value="00292a2cf82c2a29">￥</option>
+            <option value="8142241818244281">Χ</option>
+            <option value="007e424242427e00">□</option>
+            <option value="0814224122140800">◇</option>
+            <option value="004e51f1514e0000">♀</option>
+            <option value="70d888d87905030f">♂</option>
+            <option value="0000007f00000000">︱</option>
+            <option value="0808080808080800">—</option>
+            <option value="4020100804020100">╱</option>
+            <option value="0102040810204000">＼</option>
+            <option value="925438fe38549200">米</option>
+            <option value="82f282fe92929200">正</option>
+            <option value="ff89f79191f789ff">囧</option>
+      </select>
+    </div>
+      
+    <div class="display_code">
+        <div class="a box">
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+        </div>
+        <div class="a box">
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+        </div>
+        <div class="a box">
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+        </div>
+        <div class="a box">
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+        </div>
+        <div class="a box">
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+        </div>
+        <div class="a box">
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+        </div>
+        <div class="a box">
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+        </div>
+        <div class="a box">
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+          <div class="b box"></div>
+        </div>
+      </div>
+      
+
+      <script src="main.js"></script>
+</body>
+
