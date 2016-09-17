@@ -69,3 +69,97 @@
 .b.click {
   background-position: -50px 0;
 }
+
+@media (max-width:1000px) {
+  .qrcode{
+    display:none;
+  }
+}
+@media (max-width:500px) {
+  #code,
+  #deviceId {
+    font-size: 18px;
+  }
+  button {
+    font-size: 16px;
+  }
+  .box {
+    width: 45px;
+    height: 45px;
+  }
+  .b.click {
+    background-position: -45px 0;
+  }
+}
+
+@media (max-width:420px) {
+  header {
+    height: 50px;
+    line-height: 48px;
+    font-size: 18px;
+  }
+  span {
+    font-size: 14px;
+  }
+  #code,
+  #deviceId {
+    font-size: 16px;
+  }
+  button {
+    font-size: 15px;
+  }
+  .changeCode {
+    font-size: 14px;
+  }
+  .box {
+    width: 40px;
+    height: 40px;
+  }
+  .b.click {
+    background-position: -40px 0;
+  }
+}
+
+@media (max-width:380px) {
+  #br {
+    display: block;
+  }
+  .box {
+    width: 35px;
+    height: 35px;
+  }
+  .b.click {
+    background-position: -35px 0;
+  }
+}
+
+@media (max-width:340px) {
+  header {
+    height: 40px;
+    line-height: 38px;
+    font-size: 15px;
+  }
+  .content {
+    margin: 0 10px;
+  }
+  span {
+    font-size: 14px;
+  }
+  #code,
+  #deviceId {
+    font-size: 14px;
+  }
+  button {
+    font-size: 14px;
+  }
+  .changeCode {
+    font-size: 13px;
+  }
+  .box {
+    width: 30px;
+    height: 30px;
+  }
+  .b.click {
+    background-position: -30px 0;
+  }
+}
