@@ -31,6 +31,7 @@ var p_din = $("#p_din"),
     p_cs = $("#p_cs"),
     p_clk = $("#p_clk"),
     ports = $("#ports");
+    board = $("#ports");
 
 
  if (localStorage.boardName) {
@@ -56,6 +57,7 @@ submit.click(function(){
     matrix.on(code.val());
     ready.text('已連線');
     ports.slideUp(500);
+    board.slideUp(500);
     
       btnR.click(function() {
         _marqueeRight(code.val());
@@ -80,7 +82,7 @@ submit.click(function(){
 
 code.keyup(function(){
   if (code.val().length == 16) {
-    $("#btn_display").click();
+    _codeGen(code.val());
   }
 });
 
