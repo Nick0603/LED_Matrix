@@ -33,7 +33,6 @@ var p_din = $("#p_din"),
     ports = $("#ports");
     board_div = $("#board");
 
-
  if (localStorage.boardName) {
     deviceId.val(localStorage.boardName);
   }
@@ -61,6 +60,7 @@ submit.click(function(){
     if (code.val().length == 16) {
     _codeGen(code.val());
     }    
+    
       btnR.click(function() {
         _marqueeRight(code.val());
       });
